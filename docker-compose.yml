@@ -1,0 +1,15 @@
+version: '3'
+services:
+  nextjs-app:
+    build: .
+    ports:
+      - "3000:3000"
+  user-management:
+    build: ./services/user-management
+    ports:
+      - "3001:3000"
+  event-management:
+    build: ./services/event-management
+    ports:
+      - "3002:3000"
+
