@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: budget-tracking
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: budget-tracking
+  template:
+    metadata:
+      labels:
+        app: budget-tracking
+    spec:
+      containers:
+      - image: budget-tracking:latest
+        name: budget-tracking
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 250m
+            memory: 256Mi

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-management
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: event-management
+  template:
+    metadata:
+      labels:
+        app: event-management
+    spec:
+      containers:
+      - image: event-management:latest
+        name: event-management
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 250m
+            memory: 256Mi

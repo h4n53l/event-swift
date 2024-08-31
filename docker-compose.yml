@@ -4,12 +4,63 @@ services:
     build: .
     ports:
       - "3000:3000"
-  user-management:
-    build: ./services/user-management
+  analytics-reporting:
+    build: ./services/analytics-reporting
     ports:
       - "3001:3000"
+  budget-tracking:
+    build: ./services/budget-tracking
+    ports:
+      - "3002:3000"
+  calendar:
+    build: ./services/calendar
+    ports:
+      - "3003:3000"
+  communication:
+    build: ./services/communication
+    ports:
+      - "3004:3000"
+  document-generation:
+    build: ./services/document-generation
+    ports:
+      - "3005:3000"
   event-management:
     build: ./services/event-management
     ports:
-      - "3002:3000"
-
+      - "3006:3000"
+  feedback:
+    build: ./services/feedback
+    ports:
+      - "3007:3000"
+  notification:
+    build: ./services/notification
+    ports:
+      - "3008:3000"
+  portfolio:
+    build: ./services/portfolio
+    ports:
+      - "3009:3000"
+  publicity-promotion:
+    build: ./services/publicity-promotion
+    ports:
+      - "3010:3000"
+  registration-ticketing:
+    build: ./services/registration-ticketing
+    ports:
+      - "3011:3000"
+  search-discovery:
+    build: ./services/search-discovery
+    ports:
+      - "3012:3000"
+  task-management:
+    build: ./services/task-management
+    ports:
+      - "3013:3000"
+  user-management:
+    build: ./services/user-management
+    ports:
+      - "3014:3000"
+  vendor-management:
+    build: ./services/vendor-management
+    ports:
+      - "3015:3000"

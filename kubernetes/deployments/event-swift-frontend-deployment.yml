@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-swift-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: event-swift-frontend
+  template:
+    metadata:
+      labels:
+        app: event-swift-frontend
+    spec:
+      containers:
+      - name: event-swift-frontend
+        image: your-registry/event-swift-frontend:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: API_URL
+          value: "http://api-gateway-service"
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 250m
+            memory: 256Mi

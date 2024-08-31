@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: registration-ticketing
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: registration-ticketing
+  template:
+    metadata:
+      labels:
+        app: registration-ticketing
+    spec:
+      containers:
+      - image: registration-ticketing:latest
+        name: registration-ticketing
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 250m
+            memory: 256Mi
