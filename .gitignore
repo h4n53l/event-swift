@@ -40,7 +40,7 @@ next-env.d.ts
 **/.venv/
 
 # Local .terraform directories
-**/.terraform/*
+**/.terraform/
 
 # .tfstate files
 *.tfstate

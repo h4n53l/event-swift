@@ -1,0 +1,22 @@
+{
+    "sourceFile": ".gitignore",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1726576769735,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1726576778555,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,5 +36,5 @@\n *.tsbuildinfo\n next-env.d.ts\n \n # Python Virtual environment\n-**/.venv\n\\ No newline at end of file\n+**/.venv/\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1726576769735,
+            "name": "Commit-0",
+            "content": "# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.\n\n# dependencies\n**/node_modules/\n**/.pnp\n.pnp.js\n.yarn/install-state.gz\n\n# testing\n/coverage\n\n# next.js\n**/.next/\n**/out/\n\n# production\n**/build\n\n# misc\n.DS_Store\n*.pem\n\n# debug\nnpm-debug.log*\nyarn-debug.log*\nyarn-error.log*\n\n# local env files\n.env*.local\n.env\n\n# vercel\n.vercel\n\n# typescript\n*.tsbuildinfo\nnext-env.d.ts\n\n# Python Virtual environment\n**/.venv"
+        }
+    ]
+}

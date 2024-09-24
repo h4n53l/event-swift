@@ -1,0 +1,46 @@
+{
+    "sourceFile": "event-swift-infrastructure/main.tf",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 7,
+            "patches": [
+                {
+                    "date": 1726577070678,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1726577087432,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n provider \"aws\" {\r\n-  region = \"us-west-2\"  # or your preferred AWS region\r\n+  region = \"eu-west-2\"  # or your preferred AWS region\r\n }\r\n \r\n resource \"aws_cognito_user_pool\" \"eventswift_pool\" {\r\n   name = \"EventSwiftUserPool\"\r\n"
+                },
+                {
+                    "date": 1726577103683,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n provider \"aws\" {\r\n-  region = \"eu-west-2\"  # or your preferred AWS region\r\n+  region = \"eu-west-2\"  \r\n }\r\n \r\n resource \"aws_cognito_user_pool\" \"eventswift_pool\" {\r\n   name = \"EventSwiftUserPool\"\r\n"
+                },
+                {
+                    "date": 1726577506463,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n   region = \"eu-west-2\"  \r\n }\r\n \r\n resource \"aws_cognito_user_pool\" \"eventswift_pool\" {\r\n-  name = \"EventSwiftUserPool\"\r\n+  name = \"EventSwiftUsers\"\r\n \r\n   username_attributes      = [\"email\"]\r\n   auto_verified_attributes = [\"email\"]\r\n \r\n"
+                },
+                {
+                    "date": 1726577541919,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n   }\r\n \r\n   schema {\r\n     attribute_data_type = \"String\"\r\n-    name                = \"custom:specialization\"\r\n+    name                = \"custom:event_types\"\r\n     required            = false\r\n     mutable             = true\r\n   }\r\n \r\n"
+                },
+                {
+                    "date": 1726577564430,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,15 +37,8 @@\n     mutable             = true\r\n   }\r\n \r\n   schema {\r\n-    attribute_data_type = \"Number\"\r\n-    name                = \"custom:experience_years\"\r\n-    required            = false\r\n-    mutable             = true\r\n-  }\r\n-\r\n-  schema {\r\n     attribute_data_type = \"String\"\r\n     name                = \"custom:location\"\r\n     required            = false\r\n     mutable             = true\r\n"
+                },
+                {
+                    "date": 1726577597308,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,14 +50,8 @@\n     required            = false\r\n     mutable             = true\r\n   }\r\n \r\n-  schema {\r\n-    attribute_data_type = \"String\"\r\n-    name                = \"custom:availability_status\"\r\n-    required            = false\r\n-    mutable             = true\r\n-  }\r\n }\r\n \r\n resource \"aws_cognito_user_pool_client\" \"eventswift_client\" {\r\n   name = \"EventSwiftClient\"\r\n"
+                },
+                {
+                    "date": 1726609427267,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,37 +17,37 @@\n   }\r\n \r\n   schema {\r\n     attribute_data_type = \"String\"\r\n-    name                = \"custom:role\"\r\n+    name                = \"role\"\r\n     required            = false\r\n     mutable             = true\r\n   }\r\n \r\n   schema {\r\n     attribute_data_type = \"String\"\r\n-    name                = \"custom:company\"\r\n+    name                = \"company\"\r\n     required            = false\r\n     mutable             = true\r\n   }\r\n \r\n   schema {\r\n     attribute_data_type = \"String\"\r\n-    name                = \"custom:event_types\"\r\n+    name                = \"event_types\"\r\n     required            = false\r\n     mutable             = true\r\n   }\r\n \r\n   schema {\r\n     attribute_data_type = \"String\"\r\n-    name                = \"custom:location\"\r\n+    name                = \"location\"\r\n     required            = false\r\n     mutable             = true\r\n   }\r\n \r\n   schema {\r\n     attribute_data_type = \"String\"\r\n-    name                = \"custom:portfolio_url\"\r\n+    name                = \"portfolio_url\"\r\n     required            = false\r\n     mutable             = true\r\n   }\r\n \r\n"
+                }
+            ],
+            "date": 1726577070678,
+            "name": "Commit-0",
+            "content": "provider \"aws\" {\r\n  region = \"us-west-2\"  # or your preferred AWS region\r\n}\r\n\r\nresource \"aws_cognito_user_pool\" \"eventswift_pool\" {\r\n  name = \"EventSwiftUserPool\"\r\n\r\n  username_attributes      = [\"email\"]\r\n  auto_verified_attributes = [\"email\"]\r\n\r\n  password_policy {\r\n    minimum_length    = 8\r\n    require_lowercase = true\r\n    require_numbers   = true\r\n    require_symbols   = true\r\n    require_uppercase = true\r\n  }\r\n\r\n  schema {\r\n    attribute_data_type = \"String\"\r\n    name                = \"custom:role\"\r\n    required            = false\r\n    mutable             = true\r\n  }\r\n\r\n  schema {\r\n    attribute_data_type = \"String\"\r\n    name                = \"custom:company\"\r\n    required            = false\r\n    mutable             = true\r\n  }\r\n\r\n  schema {\r\n    attribute_data_type = \"String\"\r\n    name                = \"custom:specialization\"\r\n    required            = false\r\n    mutable             = true\r\n  }\r\n\r\n  schema {\r\n    attribute_data_type = \"Number\"\r\n    name                = \"custom:experience_years\"\r\n    required            = false\r\n    mutable             = true\r\n  }\r\n\r\n  schema {\r\n    attribute_data_type = \"String\"\r\n    name                = \"custom:location\"\r\n    required            = false\r\n    mutable             = true\r\n  }\r\n\r\n  schema {\r\n    attribute_data_type = \"String\"\r\n    name                = \"custom:portfolio_url\"\r\n    required            = false\r\n    mutable             = true\r\n  }\r\n\r\n  schema {\r\n    attribute_data_type = \"String\"\r\n    name                = \"custom:availability_status\"\r\n    required            = false\r\n    mutable             = true\r\n  }\r\n}\r\n\r\nresource \"aws_cognito_user_pool_client\" \"eventswift_client\" {\r\n  name = \"EventSwiftClient\"\r\n\r\n  user_pool_id = aws_cognito_user_pool.eventswift_pool.id\r\n\r\n  generate_secret     = true\r\n  explicit_auth_flows = [\"ALLOW_USER_PASSWORD_AUTH\", \"ALLOW_REFRESH_TOKEN_AUTH\"]\r\n}\r\n\r\noutput \"cognito_user_pool_id\" {\r\n  value = aws_cognito_user_pool.eventswift_pool.id\r\n}\r\n\r\noutput \"cognito_client_id\" {\r\n  value = aws_cognito_user_pool_client.eventswift_client.id\r\n}\r\n\r\noutput \"cognito_client_secret\" {\r\n  value     = aws_cognito_user_pool_client.eventswift_client.client_secret\r\n  sensitive = true\r\n}\r\n"
+        }
+    ]
+}

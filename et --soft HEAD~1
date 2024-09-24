@@ -1,0 +1,35 @@
+[33mcommit 3229e0b53c69a87d798789210c610bd627514fdd[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: = Jonathan Hansel Awo <= jonhan17@gmail.com>
+Date:   Tue Sep 24 14:44:21 2024 +0100
+
+    Added terraform to git ignore
+
+[33mcommit 9855c02c677ca7c9612557e09bb0c5845e16d73a[m
+Author: = Jonathan Hansel Awo <= jonhan17@gmail.com>
+Date:   Mon Sep 16 23:24:38 2024 +0100
+
+    Implemented AWS Cognito in user management service.
+
+[33mcommit bcd4a1fa5f9990e209601bcd333c2e41cb515a2d[m
+Author: = Jonathan Hansel Awo <= jonhan17@gmail.com>
+Date:   Wed Sep 4 21:45:08 2024 +0100
+
+    added mongodb and authentication to user management service.
+
+[33mcommit 30d1a27262a739a7120aca952a2e1537accc1f58[m
+Author: = Jonathan Hansel Awo <= jonhan17@gmail.com>
+Date:   Sat Aug 31 21:59:16 2024 +0100
+
+    setup docker and k8 for microservices
+
+[33mcommit 77e700f5183942fa447cb4825a10549e48036154[m
+Author: = Jonathan Hansel Awo <= jonhan17@gmail.com>
+Date:   Mon Aug 26 22:06:02 2024 +0100
+
+    Setting up docker container.
+
+[33mcommit 8a37313c83847efd51ca62b5686c5349882fa2b7[m
+Author: = Jonathan Hansel Awo <= jonhan17@gmail.com>
+Date:   Mon Aug 26 18:00:05 2024 +0100
+
+    Initial commit

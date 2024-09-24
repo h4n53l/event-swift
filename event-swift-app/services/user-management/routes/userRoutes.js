@@ -4,6 +4,7 @@ const {
   SignUpCommand,
   InitiateAuthCommand,
   GetUserCommand,
+  ConfirmSignUpCommand,
 } = require("@aws-sdk/client-cognito-identity-provider");
 const { cognitoClient, calculateSecretHash } = require('../cognitoConfig');
 const jwt = require('jsonwebtoken');
@@ -11,14 +12,14 @@ const jwt = require('jsonwebtoken');
 // Register a new user
 router.post('/register', async (req, res) => {
   try {
-    const { username, email, password, role } = req.body;
+    const { email, password, profile } = req.body;
     const params = {
       ClientId: process.env.COGNITO_CLIENT_ID,
       Username: email,
       Password: password,
       UserAttributes: [
         { Name: "email", Value: email },
-        { Name: "custom:role", Value: role },
+        { Name: "profile", Value: profile },
       ],
       SecretHash: calculateSecretHash(email),
     };
@@ -32,7 +33,7 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// Login
+// Login 
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -56,6 +57,26 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// Confirm user registration
+router.post('/confirm', async (req, res) => {
+  try {
+    const { email, confirmationCode } = req.body;
+    const params = {
+      ClientId: process.env.COGNITO_CLIENT_ID,
+      Username: email,
+      ConfirmationCode: confirmationCode,
+      SecretHash: calculateSecretHash(email),
+    };
+
+    const command = new ConfirmSignUpCommand(params);
+    await cognitoClient.send(command);
+
+    res.status(200).json({ message: 'User confirmed successfully' });
+  } catch (error) {
+    res.status(400).json({ message: 'Confirmation failed', error: error.message });
+  }
+});
+
 // Get user profile
 router.get('/profile', async (req, res) => {
   try {
@@ -75,9 +96,8 @@ router.get('/profile', async (req, res) => {
     }, {});
 
     res.json({
-      username: result.Username,
       email: userAttributes.email,
-      role: userAttributes['custom:role'],
+      profile: userAttributes.profile,
     });
   } catch (error) {
     res.status(401).json({ message: 'Unauthorized', error: error.message });
