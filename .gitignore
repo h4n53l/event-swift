@@ -40,3 +40,15 @@ Thumbs.db
 
 .nx/cache
 .nx/workspace-data
+
+# Next.js
+.next
+out
+
+# Enviorment Variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+

@@ -1,0 +1,107 @@
+http:
+  port: 3001
+admin:
+  port: 9876
+  hostname: localhost
+apiEndpoints:
+  user:
+    host: localhost
+    paths: '/user/*'
+  event:
+    host: localhost
+    paths: '/event/*'
+  team:
+    host: localhost
+    paths: '/team/*'
+  guest:
+    host: localhost
+    paths: '/guest/*'
+
+serviceEndpoints:
+  userService:
+    url: 'http://localhost:3002'
+  eventService:
+    url: 'http://localhost:3003'
+  teamService:
+    url: 'http://localhost:3004'
+  guestService:
+    url: 'http://localhost:3005'
+
+policies:
+  - basic-auth
+  - cors
+  - expression
+  - key-auth
+  - log
+  - oauth2
+  - proxy
+  - rate-limit
+  
+pipelines:
+  userPipeline:
+    apiEndpoints:
+      - user
+    policies:
+      - cors:
+          - action:
+              origin: '*'
+              methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
+      - rate-limit:
+          - action:
+              max: 10
+              windowMs: 60000
+      - proxy:
+          - action:
+              serviceEndpoint: userService
+              changeOrigin: true
+              
+  eventPipeline:
+    apiEndpoints:
+      - event
+    policies:
+      - cors:
+          - action:
+              origin: '*'
+              methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
+      - rate-limit:
+          - action:
+              max: 10
+              windowMs: 60000
+      - proxy:
+          - action:
+              serviceEndpoint: eventService
+              changeOrigin: true
+
+  teamPipeline:
+    apiEndpoints:
+      - team
+    policies:
+      - cors:
+          - action:
+              origin: '*'
+              methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
+      - rate-limit:
+          - action:
+              max: 10
+              windowMs: 60000
+      - proxy:
+          - action:
+              serviceEndpoint: teamService
+              changeOrigin: true
+
+  guestPipeline:
+    apiEndpoints:
+      - guest
+    policies:
+      - cors:
+          - action:
+              origin: '*'
+              methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
+      - rate-limit:
+          - action:
+              max: 10
+              windowMs: 60000
+      - proxy:
+          - action:
+              serviceEndpoint: guestService
+              changeOrigin: true
