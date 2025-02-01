@@ -1,10 +1,13 @@
 "use client";
+import { useAuth } from "../../../hooks/use-auth";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 const Navbar = () => {
 
   const [state, setState] = useState(false)
+  const { user } = useAuth();
 
   // Replace javascript:void(0) path with your path
   const navigation = [
@@ -18,14 +21,14 @@ const Navbar = () => {
 <nav className="bg-purple-600 w-full border-b md:border-0 md:static">
           <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:px-8">
               <div className="flex items-center justify-between py-3 md:py-5 md:block">
-                    <a href="javascript:void(0)">
+              <Link href="/" className="flex">
                         <Image
                             src="images/EventSwiftLogo_Secondary.svg" 
                             width={50} 
                             height={50}
                             alt="Event Swift Logo"
                         />
-                    </a>
+                    </Link>
                   <div className="md:hidden">
                       <button className="text-white outline-none p-2 rounded-md focus:border-amber-400 focus:border"
                           onClick={() => setState(!state)}
@@ -60,9 +63,19 @@ const Navbar = () => {
                   </ul>
               </div>
               <div className="hidden md:inline-block">
-                <a href="javascript:void(0)" className="py-3 px-4 text-white bg-amber-600 hover:bg-amber-700 rounded-md shadow">
+                {user ? 
+                (
+                <Link href="/dashboard" className="py-3 px-4 text-white bg-amber-600 hover:bg-amber-700 rounded-md shadow">
+                    Dashboard
+                </Link>
+                )
+                :
+                (
+                <Link href="/auth/signup" className="py-3 px-4 text-white bg-amber-600 hover:bg-amber-700 rounded-md shadow">
                     Get Started
-                </a>
+                </Link>
+                )
+                }
               </div>
           </div>
       </nav>
