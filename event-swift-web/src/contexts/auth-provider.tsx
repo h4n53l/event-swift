@@ -28,8 +28,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
     signIn: async (email: string, password: string) => {
       try {
         const response = await signIn(email, password);
+        if (!response.user) {
+          throw new Error('User data missing from response');
+        }
+    
         localStorage.setItem('token', response.access_token);
-        setUser(response.user);
+        document.cookie = `token=${response.access_token}; path=/`;
+        localStorage.setItem('user', JSON.stringify(response.user));
+    
+        // Set user state and wait for it
+        await Promise.resolve(setUser(response.user));
         router.push('/dashboard');
       } catch (error) {
         if (error instanceof AuthError) {
@@ -51,6 +59,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     },
     signOut: () => {
       localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
       setUser(null);
       router.push('/auth/signin');
     }

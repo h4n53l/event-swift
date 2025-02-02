@@ -3,18 +3,17 @@ import { useAuth } from "../../../hooks/use-auth";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import Logo from "../../../../public/images/EventSwiftLogo_Secondary.svg";
 
 const Navbar = () => {
 
   const [state, setState] = useState(false)
   const { user } = useAuth();
 
+
   // Replace javascript:void(0) path with your path
   const navigation = [
-      { title: "Customers", path: "javascript:void(0)" },
-      { title: "Careers", path: "javascript:void(0)" },
-      { title: "Guides", path: "javascript:void(0)" },
-      { title: "Partners", path: "javascript:void(0)" }
+      { title: "Coming Soon", path: "javascript:void(0)" }
   ]
   
     return (
@@ -23,7 +22,7 @@ const Navbar = () => {
               <div className="flex items-center justify-between py-3 md:py-5 md:block">
               <Link href="/" className="flex">
                         <Image
-                            src="images/EventSwiftLogo_Secondary.svg" 
+                            src={Logo}
                             width={50} 
                             height={50}
                             alt="Event Swift Logo"
