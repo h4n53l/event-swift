@@ -12,9 +12,7 @@ export default function Index() {
             <h1>
               Seamless Event Planning With Event Swift
             </h1>
-          </div>
-
-          
+          </div>          
         </div>
       </div>
     </div>

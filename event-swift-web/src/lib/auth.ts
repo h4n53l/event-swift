@@ -3,10 +3,12 @@
 import { jwtDecode } from 'jwt-decode';
 
 export interface User {
+  [x: string]: string | undefined;
   id: string;
   email: string;
   name: string;
   role: string;
+  avatar: string | undefined;
 }
 
 export interface AuthResponse {

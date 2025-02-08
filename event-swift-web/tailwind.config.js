@@ -9,7 +9,7 @@ module.exports = {
       '{src,pages,components,app}/**/*!(*.stories|*.spec).{ts,tsx,html}'
     ),
     ...createGlobPatternsForDependencies(__dirname),
-    './node_modules/@rewind-ui/core/dist/theme/styles/*.js',
+    '../node_modules/@rewind-ui/core/dist/theme/styles/*.js',
   ],
   theme: {
     extend: {},

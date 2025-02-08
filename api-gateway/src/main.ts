@@ -11,7 +11,7 @@ const app = express();
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 app.get('/api', (req, res) => {
-  res.send({ message: 'Welcome to api-gateway!' });
+  res.send({ message: 'Welcome to Event Swift api-gateway!' });
 });
 
 const port = process.env.PORT || 3333;

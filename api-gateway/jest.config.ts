@@ -1,4 +1,6 @@
-export default {
+import type { Config } from 'jest';
+
+const config: Config = {
   displayName: 'api-gateway',
   preset: '../jest.preset.js',
   testEnvironment: 'node',
@@ -8,3 +10,5 @@ export default {
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../coverage/api-gateway',
 };
+
+export default config;

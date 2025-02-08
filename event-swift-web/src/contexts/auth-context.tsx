@@ -30,3 +30,5 @@ export const AuthContext = createContext<AuthContextType>({
 
 // We also export the context name for type safety
 AuthContext.displayName = 'AuthContext';
+
+

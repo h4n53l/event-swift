@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import Logo from "../../../../public/images/EventSwiftLogo_Secondary.svg";
+import UserDropDown from "./UserDropDown";
 
 const Navbar = () => {
 
@@ -11,7 +12,8 @@ const Navbar = () => {
   const { user } = useAuth();
 
 
-  // Replace javascript:void(0) path with your path
+  console.log(user)
+  
   const navigation = [
       { title: "Coming Soon", path: "javascript:void(0)" }
   ]
@@ -64,9 +66,7 @@ const Navbar = () => {
               <div className="hidden md:inline-block">
                 {user ? 
                 (
-                <Link href="/dashboard" className="py-3 px-4 text-white bg-amber-600 hover:bg-amber-700 rounded-md shadow">
-                    Dashboard
-                </Link>
+                <UserDropDown/>
                 )
                 :
                 (

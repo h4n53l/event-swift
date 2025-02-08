@@ -1,10 +1,11 @@
-// src/contexts/auth-provider.tsx
 'use client';
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { AuthContext, AuthContextType } from './auth-context';
 import { User, AuthError, signIn, signUp, getUser } from '../lib/auth';
+import { ToastContainer, useToast } from '@rewind-ui/core';
+
 
 interface AuthProviderProps {
   children: React.ReactNode;
@@ -14,32 +15,62 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const toast = useToast();
+
 
   useEffect(() => {
-    const currentUser = getUser();
-    setUser(currentUser);
-    setLoading(false);
+    const initAuth = () => {
+      try {
+        const currentUser = getUser();
+        setUser(currentUser);
+      } catch (error) {
+        console.error('Auth initialization error:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    initAuth();
   }, []);
 
-  // Create our context value object with proper typing
   const contextValue: AuthContextType = {
     user,
     loading,
     signIn: async (email: string, password: string) => {
       try {
         const response = await signIn(email, password);
-        if (!response.user) {
-          throw new Error('User data missing from response');
-        }
-    
+        
+        // Store the JWT token
         localStorage.setItem('token', response.access_token);
-        document.cookie = `token=${response.access_token}; path=/`;
-        localStorage.setItem('user', JSON.stringify(response.user));
-    
-        // Set user state and wait for it
-        await Promise.resolve(setUser(response.user));
-        router.push('/dashboard');
+        
+        // Set cookie for server-side auth
+        document.cookie = `token=${response.access_token}; path=/; secure; samesite=lax`;
+        
+        // Get user from decoded JWT
+        const currentUser = getUser();
+        if (!currentUser) {
+          throw new Error('Failed to decode user from token');
+        }
+        
+        setUser(currentUser);
+        toast.add({
+          id: 'unique-id',
+          closeOnClick: true,
+          color: 'purple',
+          description: 'Successfully signed in!',
+          duration: 3000,
+          iconType: 'success',
+          pauseOnHover: true,
+          radius: 'lg',
+          shadow: 'none',
+          shadowColor: 'none',
+          showProgress: true,
+          title: 'Welcome back!',
+          tone: 'solid',
+        });
+        router.replace('/dashboard');
       } catch (error) {
+        console.error('Sign in error:', error);
         if (error instanceof AuthError) {
           throw error;
         }
@@ -49,7 +80,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     signUp: async (email: string, password: string, name: string) => {
       try {
         await signUp(email, password, name);
-        router.push('/auth/signin?verified=pending');
+        router.replace('/auth/signin?verified=pending');
       } catch (error) {
         if (error instanceof AuthError) {
           throw error;
@@ -59,15 +90,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
     },
     signOut: () => {
       localStorage.removeItem('token');
-      localStorage.removeItem('user');
       document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
       setUser(null);
-      router.push('/auth/signin');
+      router.replace('/auth/signin');
     }
   };
 
   return (
     <AuthContext.Provider value={contextValue}>
+      <ToastContainer />
       {children}
     </AuthContext.Provider>
   );
