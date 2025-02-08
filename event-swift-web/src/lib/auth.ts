@@ -1,10 +1,9 @@
 // src/lib/auth.ts
-// This file contains our authentication utilities and types
 import { jwtDecode } from 'jwt-decode';
 
 export interface User {
   [x: string]: string | undefined;
-  id: string;
+  userId: string;  // Changed from id to userId
   email: string;
   name: string;
   role: string;
@@ -78,4 +77,3 @@ export function getUser(): User | null {
     return null;
   }
 }
-
